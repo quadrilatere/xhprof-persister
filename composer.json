@@ -1,0 +1,24 @@
+{
+    "name": "csa/xhprof",
+    "description": "A small abstraction in front of the xhprof extension, with storage support",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Charles Sarrazin",
+            "email": "charles@sarraz.in"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "XhProf\\": "src/" }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "ext-xhprof": "~0.9.3"
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.0-dev"
+        }
+    }
+}
