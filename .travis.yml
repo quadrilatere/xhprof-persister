@@ -1,0 +1,10 @@
+language: php
+
+php:
+  - 5.3.3
+  - 5.3
+  - 5.4
+  - 5.5
+
+before_script:
+  - pecl install channel://pecl.php.net/xhprof-0.9.3
