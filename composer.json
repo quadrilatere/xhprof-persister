@@ -1,5 +1,5 @@
 {
-    "name": "csa/xhprof",
+    "name": "csa/xhprof-persister",
     "description": "A small abstraction in front of the xhprof extension, with storage support",
     "license": "MIT",
     "authors": [
