@@ -8,6 +8,7 @@ php:
 
 before_script:
   - pecl install channel://pecl.php.net/xhprof-0.9.3
+  - COMPOSER_ROOT_VERSION=dev-master composer --prefer-source --dev install
 
 script:
   - phpunit --coverage-text
