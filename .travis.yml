@@ -8,3 +8,6 @@ php:
 
 before_script:
   - pecl install channel://pecl.php.net/xhprof-0.9.3
+
+script:
+  - phpunit --coverage-text
