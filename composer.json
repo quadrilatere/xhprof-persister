@@ -12,7 +12,7 @@
         "psr-0": { "XhProf\\": "src/" }
     },
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4.0",
         "ext-xhprof": "~0.9.3"
     },
     "minimum-stability": "dev",
