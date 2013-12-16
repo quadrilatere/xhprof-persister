@@ -57,6 +57,11 @@ class Profiler
         $this->running = false;
 
         $data = xhprof_disable();
+
+        if(function_exists('fastcgi_finish_request')) {
+            fastcgi_finish_request();
+        }
+
         $token = sha1(uniqid().microtime());
 
         $trace = new Trace($token, $data);
