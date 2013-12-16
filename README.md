@@ -7,7 +7,7 @@ XhProf persister
 Installation
 ------------
 
-    composer require csa/xhprof-persister:1.0.*@dev
+    composer require csa/xhprof-persister:0.0.*@dev
 
 Usage
 -----
