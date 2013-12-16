@@ -2,11 +2,8 @@
 
 namespace XhProf\Graph\Loader;
 
-use XhProf\Graph\Graph;
 use XhProf\Graph\Loader\LoadingStrategy\InclusiveLoadingStrategy;
-use XhProf\Graph\Vertex;
 use XhProf\Storage\StorageInterface;
-use XhProf\Trace;
 
 class XhProfDataLoader
 {
