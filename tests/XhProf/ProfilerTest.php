@@ -19,9 +19,9 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-	if (!extension_loaded('xhprof')) {
+	    if (!extension_loaded('xhprof')) {
             return;
-	}
+        }
 
         if ($this->profiler->isRunning()) {
             $this->profiler->stop();
