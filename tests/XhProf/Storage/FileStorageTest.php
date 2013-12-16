@@ -20,12 +20,16 @@ class FileStorageTest extends \PHPUnit_Framework_TestCase
         $token = '03a208c1140e2dd9ad953bfe5db9e7835e7a035a';
         $trace = $this->getTraceMock($data, $token);
         $expectedFile = sprintf('%s/xhprof/%s.trace', sys_get_temp_dir(), $token);
+        $dir = dirname($expectedFile);
+        $directoryExists = file_exists($dir);
 
         $storage = new FileStorage();
         $this->assertNull($storage->store($trace));
         $this->assertFileExists($expectedFile);
         unlink($expectedFile);
-        rmdir(dirname($expectedFile));
+        if (!$directoryExists) {
+            rmdir(dirname($expectedFile));
+        }
     }
 
     public function testPersisterCanFetchFile()
