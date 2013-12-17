@@ -1,12 +1,17 @@
 language: php
 
 php:
+  - hhvm
   - 5.4
   - 5.5
 
 before_script:
-  - pecl install channel://pecl.php.net/xhprof-0.9.3
+  - sh -c 'if [ $(php -r "echo (int) defined(\"HHVM_VERSION\");") -eq 0 ]; then pecl install channel://pecl.php.net/xhprof-0.9.3; fi'
   - COMPOSER_ROOT_VERSION=dev-master composer --prefer-source --dev install
 
 script:
   - phpunit --coverage-text
+
+matrix:
+  allow_failures:
+    - php: hhvm
