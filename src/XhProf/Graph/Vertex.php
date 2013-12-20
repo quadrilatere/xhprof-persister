@@ -4,8 +4,13 @@ namespace XhProf\Graph;
 
 class Vertex
 {
+    /** @var string */
     private $name;
+
+    /** @var Graph */
     private $graph;
+
+    /** @var array|Edge[] */
     private $edges;
 
     public function __construct($name, Graph $graph)
