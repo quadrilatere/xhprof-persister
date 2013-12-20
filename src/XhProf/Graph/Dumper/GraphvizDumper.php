@@ -16,15 +16,16 @@ class GraphvizDumper implements DumperInterface
     
     public function dump(Graph $graph)
     {
-        $output = 'digraph G {' . PHP_EOL;
+        $output = array();
+        $output[] = 'digraph G {' . PHP_EOL;
 
         foreach ($graph->getVertex(Graph::ROOT)->getEdges() as $edge) {
-            $output .= $this->visitVertex($graph, $edge);
+            $output[] = $this->visitVertex($graph, $edge);
         }
 
-        $output .= '}';
+        $output[] = '}';
 
-        return $this->executeDotScript($output);
+        return $this->executeDotScript(implode(PHP_EOL, $output));
     }
 
     private function visitVertex(Graph $graph, Edge $vertex)
@@ -33,7 +34,8 @@ class GraphvizDumper implements DumperInterface
             return '';
         }
 
-        $output = sprintf(
+        $output = array();
+        $output[] = sprintf(
             '"%s" [label="\r\N\n%s"];%s',
             $vertex->getTo()->getName(),
             $vertex->getWeight(Edge::EXECUTION_TIME),
@@ -41,7 +43,7 @@ class GraphvizDumper implements DumperInterface
         );
 
         foreach ($vertex->getTo()->getEdges() as $edge) {
-            $output .= sprintf(
+            $output[] = sprintf(
                 '"%s" -> "%s" [label="%s"];%s',
                 $vertex->getTo()->getName(),
                 $edge->getName(),
@@ -50,7 +52,7 @@ class GraphvizDumper implements DumperInterface
             );
         }
 
-        return $output;
+        return implode(PHP_EOL, $output);
     }
 
     private function executeDotScript($dotScript)
@@ -79,7 +81,7 @@ class GraphvizDumper implements DumperInterface
         proc_close($process);
 
         if (!empty($error)) {
-            throw new DumperException('DOT produced an error.');
+            throw new DumperException(sprintf('DOT produced an error: %s', trim($error)));
         }
 
         if (empty($output)) {
