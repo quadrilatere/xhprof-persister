@@ -1,7 +1,7 @@
 XhProf persister
 ================
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/27110f23-d1eb-4916-8b81-f6b522801b66/mini.png)](https://insight.sensiolabs.com/projects/27110f23-d1eb-4916-8b81-f6b522801b66)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/5acc0d66-b224-4471-9dc2-e69e6d040fae/mini.png)](https://insight.sensiolabs.com/projects/5acc0d66-b224-4471-9dc2-e69e6d040fae)
 [![Build Status](https://travis-ci.org/csarrazi/xhprof-persister.png?branch=master)](https://travis-ci.org/csarrazi/xhprof-persister)
 
 Installation
