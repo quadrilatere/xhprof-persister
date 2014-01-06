@@ -47,3 +47,7 @@ License
 This library is under the MIT license. For the full copyright and license
 information, please view the LICENSE file that was distributed with this source
 code.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/csarrazi/xhprof-persister/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
