@@ -1,8 +1,9 @@
 XhProf persister
 ================
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/5acc0d66-b224-4471-9dc2-e69e6d040fae/mini.png)](https://insight.sensiolabs.com/projects/5acc0d66-b224-4471-9dc2-e69e6d040fae)
-[![Build Status](https://travis-ci.org/csarrazi/xhprof-persister.png?branch=master)](https://travis-ci.org/csarrazi/xhprof-persister)
+[![SensioLabs Insight](https://insight.sensiolabs.com/projects/5acc0d66-b224-4471-9dc2-e69e6d040fae/mini.png)](https://insight.sensiolabs.com/projects/5acc0d66-b224-4471-9dc2-e69e6d040fae "SensioLabs Insight")
+[![Build Status](https://travis-ci.org/csarrazi/xhprof-persister.png?branch=master)](https://travis-ci.org/csarrazi/xhprof-persister "Build status")
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/csarrazi/xhprof-persister/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 Installation
 ------------
@@ -47,3 +48,4 @@ License
 This library is under the MIT license. For the full copyright and license
 information, please view the LICENSE file that was distributed with this source
 code.
+
