@@ -73,6 +73,10 @@ class Profiler
 
     public function setShutdownFunction($callback)
     {
+        if (!is_callable($callback)) {
+            throw new \InvalidArgumentException('The shutdown function should be a callable');
+        }
+
         $this->shutdownFunction = $callback;
     }
 
