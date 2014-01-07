@@ -6,11 +6,18 @@ class Graph
 {
     const ROOT = '__root__';
 
+    /**
+     * @var Vertex[]
+     */
     private $vertices;
+
+    /**
+     * @var Edge[]
+     */
     private $edges;
 
     /**
-     * @return array
+     * @return Vertex[]
      */
     public function getVertices()
     {
@@ -40,7 +47,7 @@ class Graph
     }
 
     /**
-     * @return array
+     * @return Edge[]
      */
     public function getEdges()
     {

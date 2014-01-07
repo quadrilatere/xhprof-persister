@@ -20,43 +20,67 @@ class Edge
         self::PEAK_MEMORY_USAGE => 0,
     );
 
+    /**
+     * @param Vertex $from
+     * @param Vertex $to
+     * @param array $weights
+     */
     public function __construct(Vertex $from, Vertex $to, array $weights = array())
     {
         $this->from    = $from;
         $this->to      = $to;
-
         $this->weights = array_merge($this->weights, array_intersect_key($weights, $this->weights));
     }
 
+    /**
+     * @return Vertex
+     */
     public function getFrom()
     {
         return $this->from;
     }
 
+    /**
+     * @return Vertex
+     */
     public function getTo()
     {
         return $this->to;
     }
 
+    /**
+     * @return array
+     */
     public function getWeights()
     {
         return $this->weights;
     }
 
+    /**
+     * @param $type
+     *
+     * @return int
+     */
     public function getWeight($type)
     {
-        if (isset($this->weights[$type])) {
+        if (!isset($this->weights[$type])) {
             return $this->weights[$type];
         }
 
-        return null;
+        return 0;
     }
 
+    /**
+     * @return bool
+     */
     public function isLoop()
     {
         return $this->from === $this->to;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return sprintf('%s - %s', $this->from->getName(), $this->to->getName());

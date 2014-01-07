@@ -9,18 +9,24 @@ class GraphvizDumper implements DumperInterface
 {
     private $format;
 
+    /**
+     * @param string $format
+     */
     public function __construct($format = 'png')
     {
         $this->format = $format;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function dump(Graph $graph)
     {
         $output = array();
         $output[] = 'digraph G {' . PHP_EOL;
 
         foreach ($graph->getVertex(Graph::ROOT)->getEdges() as $edge) {
-            $output[] = $this->visitVertex($graph, $edge);
+            $output[] = $this->visitVertex($edge);
         }
 
         $output[] = '}';
@@ -28,7 +34,7 @@ class GraphvizDumper implements DumperInterface
         return $this->executeDotScript(implode(PHP_EOL, $output));
     }
 
-    private function visitVertex(Graph $graph, Edge $vertex)
+    private function visitVertex(Edge $vertex)
     {
         if (!$vertex->getTo()) {
             return '';
@@ -55,6 +61,12 @@ class GraphvizDumper implements DumperInterface
         return implode(PHP_EOL, $output);
     }
 
+    /**
+     * @param string $dotScript
+     *
+     * @return string
+     * @throws DumperException
+     */
     private function executeDotScript($dotScript)
     {
         $descriptors = array(
