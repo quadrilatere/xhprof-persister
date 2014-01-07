@@ -1,3 +1,16 @@
+imports:
+    - php
+
 tools:
+    php_cpd: true
+    php_pdepend: true
+    php_analyzer: true
+    php_mess_detector:
+        enabled: true
+        filter:
+            paths: {  }
+            excluded_paths:
+                - '/tests/*'
     external_code_coverage:
         timeout: 600
+    sensiolabs_security_checker: true
