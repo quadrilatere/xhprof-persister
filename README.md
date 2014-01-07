@@ -2,6 +2,7 @@ XhProf persister
 ================
 
 [![SensioLabs Insight](https://insight.sensiolabs.com/projects/5acc0d66-b224-4471-9dc2-e69e6d040fae/mini.png)](https://insight.sensiolabs.com/projects/5acc0d66-b224-4471-9dc2-e69e6d040fae "SensioLabs Insight")
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/csarrazi/xhprof-persister/badges/quality-score.png?s=4cc1f926cfc0f4c39596a0f6fa6dcd3b4f71a2ff)](https://scrutinizer-ci.com/g/csarrazi/xhprof-persister/ "Scrutinizer Quality Score")
 [![Build Status](https://travis-ci.org/csarrazi/xhprof-persister.png?branch=master)](https://travis-ci.org/csarrazi/xhprof-persister "Build status")
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/csarrazi/xhprof-persister/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
