@@ -13,34 +13,30 @@ class InclusiveLoadingStrategy implements LoadingStrategyInterface
         $graph = new Graph();
 
         foreach ($trace->getData() as $vertices => $weights) {
-            $pos = strpos($vertices, '==>');
-
-            if (!$pos) {
-                $from = new Vertex(Graph::ROOT, $graph);
-                $graph->addVertex($from);
-
-                if (!$to = $graph->getVertex($vertices)) {
-                    $to = new Vertex($vertices, $graph);
-                    $graph->addVertex($to);
-                }
+            if (!$pos = strpos($vertices, '==>')) {
+                $fromName = Graph::ROOT;
+                $toName = $vertices;
             } else {
                 $fromName = substr($vertices, 0, $pos);
                 $toName = substr($vertices, $pos + 3);
-
-                if (!$from = $graph->getVertex($fromName)) {
-                    $from = new Vertex($fromName, $graph);
-                    $graph->addVertex($from);
-                }
-
-                if (!$to = $graph->getVertex($toName)) {
-                    $to = new Vertex($toName, $graph);
-                    $graph->addVertex($to);
-                }
             }
+
+            $from = $this->findOrCreateVertex($graph, $fromName);
+            $to = $this->findOrCreateVertex($graph, $toName);
 
             $from->connect($to, $weights);
         }
 
         return $graph;
+    }
+
+    private function findOrCreateVertex(Graph $graph, $name)
+    {
+        if (!$vertex = $graph->getVertex($name)) {
+            $vertex = new Vertex($name, $graph);
+            $graph->addVertex($vertex);
+        }
+
+        return $vertex;
     }
 }
