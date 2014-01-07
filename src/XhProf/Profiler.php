@@ -13,6 +13,11 @@ class Profiler
     private $running = false;
     private $shutdownFunction;
 
+    /**
+     * @param StorageInterface $storage
+     * @param null $flags
+     * @param array $options
+     */
     public function __construct(StorageInterface $storage, $flags = null, array $options = array())
     {
         if (!extension_loaded('xhprof')) {
@@ -28,6 +33,9 @@ class Profiler
         $this->shutdownFunction = array($this, 'stop');
     }
 
+    /**
+     * @throws \LogicException
+     */
     public function start()
     {
         if (true === $this->running) {
@@ -44,6 +52,10 @@ class Profiler
         });
     }
 
+    /**
+     * @return Trace
+     * @throws \LogicException
+     */
     public function stop()
     {
         if (false === $this->started) {
@@ -71,6 +83,11 @@ class Profiler
         return $trace;
     }
 
+    /**
+     * @param callable $callback
+     *
+     * @throws \InvalidArgumentException
+     */
     public function setShutdownFunction($callback)
     {
         if (!is_callable($callback)) {
@@ -80,6 +97,9 @@ class Profiler
         $this->shutdownFunction = $callback;
     }
 
+    /**
+     * @return bool
+     */
     public function isRunning()
     {
         return $this->running;

@@ -8,7 +8,24 @@ use XhProf\Graph\Vertex;
 
 interface VisitorInterface
 {
-    public function visit(Graph $graph);
+    /**
+     * @param Graph $graph
+     *
+     * @return mixed
+     */
+    public function visitGraph(Graph $graph);
+
+    /**
+     * @param Edge $edge
+     *
+     * @return mixed
+     */
     public function visitEdge(Edge $edge);
+
+    /**
+     * @param Vertex $vertex
+     *
+     * @return mixed
+     */
     public function visitVertex(Vertex $vertex);
 }
