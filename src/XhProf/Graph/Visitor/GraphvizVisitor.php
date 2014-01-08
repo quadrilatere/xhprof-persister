@@ -38,7 +38,7 @@ class GraphvizVisitor implements VisitorInterface
      */
     public function visitEdge(Edge $edge)
     {
-        if (!$vertex = $edge->getTo()) {
+        if (!$edge->getTo()) {
             return;
         }
 
