@@ -2,7 +2,10 @@
 
 namespace XhProf\Graph;
 
-class Vertex
+use XhProf\Graph\Visitor\VisitableInterface;
+use XhProf\Graph\Visitor\VisitorInterface;
+
+class Vertex implements VisitableInterface
 {
     /**
      * @var string
@@ -64,5 +67,17 @@ class Vertex
         $this->graph->addEdge($edge);
 
         return $edge;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function accept(VisitorInterface $visitor)
+    {
+        foreach ($this->getEdges() as $edge) {
+            if ($edge->getFrom() === $this) {
+                $visitor->visitEdge($edge);
+            }
+        }
     }
 }

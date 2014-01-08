@@ -2,7 +2,10 @@
 
 namespace XhProf\Graph;
 
-class Graph
+use XhProf\Graph\Visitor\VisitableInterface;
+use XhProf\Graph\Visitor\VisitorInterface;
+
+class Graph implements VisitableInterface
 {
     const ROOT = '__root__';
 
@@ -60,5 +63,13 @@ class Graph
     public function addEdge(Edge $edge)
     {
         $this->edges[] = $edge;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function accept(VisitorInterface $visitor)
+    {
+        $visitor->visitVertex($this->getVertex(self::ROOT));
     }
 }
