@@ -28,7 +28,7 @@ class Graph implements VisitableInterface
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return Vertex
      */
     public function getVertex($name)
