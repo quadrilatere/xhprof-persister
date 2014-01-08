@@ -2,7 +2,10 @@
 
 namespace XhProf\Graph;
 
-class Edge
+use XhProf\Graph\Visitor\VisitableInterface;
+use XhProf\Graph\Visitor\VisitorInterface;
+
+class Edge implements VisitableInterface
 {
     const CALL_COUNT        = 'ct';  // number of calls to bar() from foo()
     const EXECUTION_TIME    = 'wt';  // time in bar() when called from foo()
@@ -63,11 +66,11 @@ class Edge
      */
     public function getWeight($type)
     {
-        if (!isset($this->weights[$type])) {
+        if (isset($this->weights[$type])) {
             return $this->weights[$type];
         }
 
-        return 0;
+        return null;
     }
 
     /**
@@ -84,5 +87,13 @@ class Edge
     public function getName()
     {
         return sprintf('%s - %s', $this->from->getName(), $this->to->getName());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function accept(VisitorInterface $visitor)
+    {
+        $visitor->visitVertex($this->to);
     }
 }

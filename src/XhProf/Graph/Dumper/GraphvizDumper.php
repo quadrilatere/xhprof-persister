@@ -4,6 +4,8 @@ namespace XhProf\Graph\Dumper;
 
 use XhProf\Graph\Edge;
 use XhProf\Graph\Graph;
+use XhProf\Graph\Visitor\GraphvizVisitor;
+use XhProf\Graph\Visitor\VisitorInterface;
 
 class GraphvizDumper implements DumperInterface
 {
@@ -22,43 +24,9 @@ class GraphvizDumper implements DumperInterface
      */
     public function dump(Graph $graph)
     {
-        $output = array();
-        $output[] = 'digraph G {' . PHP_EOL;
-
-        foreach ($graph->getVertex(Graph::ROOT)->getEdges() as $edge) {
-            $output[] = $this->visitVertex($edge);
-        }
-
-        $output[] = '}';
-
-        return $this->executeDotScript(implode(PHP_EOL, $output));
-    }
-
-    private function visitVertex(Edge $vertex)
-    {
-        if (!$vertex->getTo()) {
-            return '';
-        }
-
-        $output = array();
-        $output[] = sprintf(
-            '"%s" [label="\r\N\n%s"];%s',
-            $vertex->getTo()->getName(),
-            $vertex->getWeight(Edge::EXECUTION_TIME),
-            PHP_EOL
-        );
-
-        foreach ($vertex->getTo()->getEdges() as $edge) {
-            $output[] = sprintf(
-                '"%s" -> "%s" [label="%s"];%s',
-                $vertex->getTo()->getName(),
-                $edge->getName(),
-                $edge->getWeight(Edge::EXECUTION_TIME),
-                PHP_EOL
-            );
-        }
-
-        return implode(PHP_EOL, $output);
+        $visitor = new GraphvizVisitor();
+        $visitor->visitGraph($graph);
+        return $this->executeDotScript($visitor->getOutput());
     }
 
     /**
