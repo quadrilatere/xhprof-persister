@@ -7,6 +7,8 @@ use XhProf\Graph\Vertex;
 
 class GraphvizFormatter
 {
+    private $metricsFormatter;
+
     public function __construct()
     {
         $this->metricsFormatter = new MetricsFormatter();

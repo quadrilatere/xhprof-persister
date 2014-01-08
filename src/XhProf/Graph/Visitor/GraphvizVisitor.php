@@ -28,9 +28,9 @@ class GraphvizVisitor implements VisitorInterface
      */
     public function visitGraph(Graph $graph)
     {
-        $this->output[] = $output[] = 'digraph G {';
+        $this->output[] = 'digraph G {';
         $graph->accept($this);
-        $this->output[] = $output[] = '}';
+        $this->output[] = '}';
     }
 
     /**
