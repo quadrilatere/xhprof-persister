@@ -29,7 +29,7 @@ class Graph implements VisitableInterface
 
     /**
      * @param string $name
-     * @return Vertex
+     * @return Vertex|null
      */
     public function getVertex($name)
     {
@@ -70,6 +70,10 @@ class Graph implements VisitableInterface
      */
     public function accept(VisitorInterface $visitor)
     {
-        $visitor->visitVertex($this->getVertex('main()'));
+        if (!$vertex = $this->getVertex('main()')) {
+            throw new \LogicException('The graph should at least have a main() node.');
+        }
+
+        $visitor->visitVertex($vertex);
     }
 }

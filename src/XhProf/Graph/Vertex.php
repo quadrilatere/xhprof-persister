@@ -80,7 +80,7 @@ class Vertex implements VisitableInterface
     {
         $that = $this;
         $edges = array_filter($this->getEdges(), function (Edge $edge) use ($that) {
-            return $edge->getTo() === $this;
+            return $edge->getTo() === $that;
         });
 
         $sum = 0;
