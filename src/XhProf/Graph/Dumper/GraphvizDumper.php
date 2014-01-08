@@ -2,10 +2,8 @@
 
 namespace XhProf\Graph\Dumper;
 
-use XhProf\Graph\Edge;
 use XhProf\Graph\Graph;
 use XhProf\Graph\Visitor\GraphvizVisitor;
-use XhProf\Graph\Visitor\VisitorInterface;
 
 class GraphvizDumper implements DumperInterface
 {
