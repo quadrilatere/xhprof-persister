@@ -22,6 +22,7 @@ class Edge implements VisitableInterface
         self::MEMORY_USAGE      => 0,
         self::PEAK_MEMORY_USAGE => 0,
     );
+    private $visited;
 
     /**
      * @param Vertex $from
@@ -33,6 +34,7 @@ class Edge implements VisitableInterface
         $this->from    = $from;
         $this->to      = $to;
         $this->weights = array_merge($this->weights, array_intersect_key($weights, $this->weights));
+        $this->visited = false;
     }
 
     /**
@@ -94,6 +96,9 @@ class Edge implements VisitableInterface
      */
     public function accept(VisitorInterface $visitor)
     {
-        $visitor->visitVertex($this->to);
+        if (!$this->visited) {
+            $this->visited = true;
+            $visitor->visitVertex($this->to);
+        }
     }
 }

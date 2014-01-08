@@ -70,6 +70,6 @@ class Graph implements VisitableInterface
      */
     public function accept(VisitorInterface $visitor)
     {
-        $visitor->visitVertex($this->getVertex(self::ROOT));
+        $visitor->visitVertex($this->getVertex('main()'));
     }
 }

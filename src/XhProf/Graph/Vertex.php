@@ -23,6 +23,11 @@ class Vertex implements VisitableInterface
     private $edges;
 
     /**
+     * @var bool
+     */
+    private $visited;
+
+    /**
      * @param $name
      * @param Graph $graph
      */
@@ -30,6 +35,8 @@ class Vertex implements VisitableInterface
     {
         $this->name = $name;
         $this->graph = $graph;
+        $this->edges = array();
+        $this->visited = false;
     }
 
     /**
@@ -69,12 +76,33 @@ class Vertex implements VisitableInterface
         return $edge;
     }
 
+    public function computeWeight($type)
+    {
+        $that = $this;
+        $edges = array_filter($this->getEdges(), function (Edge $edge) use ($that) {
+            return $edge->getTo() === $this;
+        });
+
+        $sum = 0;
+        foreach ($edges as $edge) {
+            $sum += $edge->getWeight($type);
+        }
+
+        return $sum;
+    }
+
     /**
      * {@inheritDoc}
      */
     public function accept(VisitorInterface $visitor)
     {
-        foreach ($this->getEdges() as $edge) {
+        if ($this->visited) {
+            return;
+        }
+
+        $this->visited = true;
+
+        foreach ($this->edges as $edge) {
             if ($edge->getFrom() === $this) {
                 $visitor->visitEdge($edge);
             }
