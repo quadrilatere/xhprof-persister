@@ -42,8 +42,6 @@ class GraphvizVisitor implements VisitorInterface
             return;
         }
 
-        $this->output[] = $this->formatter->formatVertex($vertex, $edge);
-
         $this->output[] = $this->formatter->formatEdge($edge);
         $edge->accept($this);
     }
@@ -53,6 +51,7 @@ class GraphvizVisitor implements VisitorInterface
      */
     public function visitVertex(Vertex $vertex)
     {
+        $this->output[] = $this->formatter->formatVertex($vertex);
         $vertex->accept($this);
     }
 }

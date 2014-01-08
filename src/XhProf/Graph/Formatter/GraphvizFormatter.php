@@ -14,7 +14,7 @@ class GraphvizFormatter
         $this->metricsFormatter = new MetricsFormatter();
     }
 
-    public function formatVertex(Vertex $vertex, Edge $edge)
+    public function formatVertex(Vertex $vertex)
     {
         $output = <<<EOT
 "%s" [shape=none, label=<
@@ -50,11 +50,11 @@ EOT;
             $output,
             $vertex->getName(),
             $vertex->getName(),
-            $edge->getWeight(Edge::CALL_COUNT),
-            $this->metricsFormatter->formatTime($edge->getWeight(Edge::EXECUTION_TIME)),
-            $this->metricsFormatter->formatTime($edge->getWeight(Edge::CPU_USAGE)),
-            $this->metricsFormatter->formatBytes($edge->getWeight(Edge::MEMORY_USAGE)),
-            $this->metricsFormatter->formatBytes($edge->getWeight(Edge::PEAK_MEMORY_USAGE))
+            $vertex->computeWeight(Edge::CALL_COUNT),
+            $this->metricsFormatter->formatTime($vertex->computeWeight(Edge::EXECUTION_TIME)),
+            $this->metricsFormatter->formatTime($vertex->computeWeight(Edge::CPU_USAGE)),
+            $this->metricsFormatter->formatBytes($vertex->computeWeight(Edge::MEMORY_USAGE)),
+            $this->metricsFormatter->formatBytes($vertex->computeWeight(Edge::PEAK_MEMORY_USAGE))
         );
     }
 
