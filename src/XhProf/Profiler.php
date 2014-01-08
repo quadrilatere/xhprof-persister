@@ -27,7 +27,11 @@ class Profiler
         $this->storage = $storage;
         $this->flags   = $flags ?: (XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
         $this->options = array_merge_recursive(
-            array('ignored_functions' => array('XhProf\\Profiler::stop', 'xhprof_disable', 'XhProf\Profiler::XhProf\{closure}')),
+            array('ignored_functions' => array(
+                'XhProf\\Profiler::stop',
+                'xhprof_disable',
+                'XhProf\Profiler::XhProf\{closure}',
+            )),
             $options
         );
         $this->shutdownFunction = array($this, 'stop');
