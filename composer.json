@@ -9,7 +9,7 @@
         }
     ],
     "autoload": {
-        "psr-0": { "XhProf\\": "src/" }
+        "psr-4": { "XhProf\\": "src/" }
     },
     "require": {
         "php": ">=5.4.0",
