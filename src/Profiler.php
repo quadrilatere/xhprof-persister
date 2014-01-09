@@ -20,10 +20,6 @@ class Profiler
      */
     public function __construct(StorageInterface $storage, $flags = null, array $options = array())
     {
-        if (!extension_loaded('xhprof')) {
-            throw new \LogicException('The XhProf extension is not available');
-        }
-
         $this->storage = $storage;
         $this->flags   = $flags ?: (XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
         $this->options = array_merge_recursive(
