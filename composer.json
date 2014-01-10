@@ -20,5 +20,8 @@
         "branch-alias": {
             "dev-master": "0.3-dev"
         }
+    },
+    "suggest": {
+        "csa/xhprof-grapher": "Allows creating a callgraph from a trace"
     }
 }
