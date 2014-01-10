@@ -48,7 +48,7 @@ class Profiler
 
         $that = $this;
         register_shutdown_function(function() use ($that) {
-            register_shutdown_function($that->shutdownFunction);
+            register_shutdown_function(array($that, 'executeShutdown'));
         });
     }
 
@@ -81,6 +81,11 @@ class Profiler
         $this->storage->store($trace);
 
         return $trace;
+    }
+
+    public function executeShutdown()
+    {
+        call_user_func($this->shutdownFunction);
     }
 
     /**
