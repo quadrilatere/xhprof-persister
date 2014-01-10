@@ -1,9 +1,10 @@
 language: php
 
 php:
-  - hhvm
+  - 5.3
   - 5.4
   - 5.5
+  - hhvm
 
 before_script:
   - sh -c 'if [ $(php -r "echo (int) defined(\"HHVM_VERSION\");") -eq 0 ]; then pecl install channel://pecl.php.net/xhprof-0.9.3; fi'
