@@ -27,6 +27,7 @@ class Profiler
                 'XhProf\\Profiler::stop',
                 'xhprof_disable',
                 'XhProf\Profiler::XhProf\{closure}',
+                'XhProf\Profiler::executeShutdown',
             )),
             $options
         );
@@ -42,7 +43,6 @@ class Profiler
             throw new \LogicException('The profiler has already been started');
         }
 
-        xhprof_enable($this->flags, $this->options);
         $this->started = true;
         $this->running = true;
 
@@ -50,6 +50,8 @@ class Profiler
         register_shutdown_function(function() use ($that) {
             register_shutdown_function(array($that, 'executeShutdown'));
         });
+
+        xhprof_enable($this->flags, $this->options);
     }
 
     /**

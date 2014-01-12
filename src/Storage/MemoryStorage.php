@@ -22,7 +22,7 @@ class MemoryStorage implements StorageInterface
     public function fetch($token)
     {
         if (!isset($this->traces[$token])) {
-            throw new StorageException('Cannot find trace with token %s', $token);
+            throw new StorageException(sprintf('Cannot find trace with token %s', $token));
         }
 
         return $this->traces[$token];

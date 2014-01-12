@@ -45,6 +45,30 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
         $this->profiler->stop();
     }
 
+    public function testProfilerOnlyReturnsTraceOnFirstStop()
+    {
+        $this->profiler->start();
+        $this->assertNotNull($this->profiler->stop());
+        $this->assertNull($this->profiler->stop());
+    }
+
+    /**
+     * @dataProvider provideCorrectCallbacks
+     */
+    public function testShutdownFunctionSetterDoesntThrowExceptionWhenGivenCorrectCallback($callback)
+    {
+        $this->profiler->setShutdownFunction($callback);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @dataProvider provideBadCallbacks
+     */
+    public function testShutdownFunctionSetterThrowsExceptionWhenGivenInvalidCallback($callback)
+    {
+        $this->profiler->setShutdownFunction($callback);
+    }
+
     public function testProfiler()
     {
         $this->storage->expects($this->once())->method('store');
@@ -63,6 +87,40 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
         $trace = $this->profiler->stop();
 
         $this->assertInstanceOf('XhProf\\Trace', $trace);
+    }
+
+    public function testCallShutdownFunction()
+    {
+        $shutdownMock = $this
+            ->getMockBuilder('DateTime')
+            ->setMethods(array('getTimestamp'))
+            ->getMock();
+
+        $shutdownMock
+            ->expects($this->once())
+            ->method('getTimestamp')
+        ;
+
+        $this->profiler->setShutdownFunction(array($shutdownMock, 'getTimestamp'));
+        $this->profiler->executeShutDown();
+    }
+
+    public function provideCorrectCallbacks()
+    {
+        return array(
+            array('mysql_connect'),
+            array(array('DateTime', 'createFromFormat')),
+        );
+    }
+
+    public function provideBadCallbacks()
+    {
+        return array(
+            array('hello'),
+            array(12),
+            array(array('hello', 'world')),
+            array(array('DateTime', 'echo')),
+        );
     }
 }
  
