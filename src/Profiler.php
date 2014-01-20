@@ -11,11 +11,8 @@
 
 namespace XhProf;
 
-use XhProf\Storage\StorageInterface;
-
 class Profiler
 {
-    private $storage;
     private $flags;
     private $options;
     private $started = false;
@@ -27,9 +24,8 @@ class Profiler
      * @param null $flags
      * @param array $options
      */
-    public function __construct(StorageInterface $storage, $flags = null, array $options = array())
+    public function __construct($flags = null, array $options = array())
     {
-        $this->storage = $storage;
         $this->flags   = $flags ?: (XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
         $this->options = array_merge_recursive(
             array('ignored_functions' => array(
@@ -40,7 +36,6 @@ class Profiler
             )),
             $options
         );
-        $this->shutdownFunction = array($this, 'stop');
     }
 
     /**
@@ -56,6 +51,7 @@ class Profiler
         $this->running = true;
 
         $that = $this;
+
         register_shutdown_function(function() use ($that) {
             register_shutdown_function(array($that, 'executeShutdown'));
         });
@@ -87,16 +83,14 @@ class Profiler
 
         $token = sha1(uniqid().microtime());
 
-        $trace = new Trace($token, $data);
-
-        $this->storage->store($trace);
-
-        return $trace;
+        return new Trace($token, $data);
     }
 
     public function executeShutdown()
     {
-        call_user_func($this->shutdownFunction);
+        if ($trace = $this->stop()) {
+            call_user_func_array($this->shutdownFunction, array($trace));
+        }
     }
 
     /**

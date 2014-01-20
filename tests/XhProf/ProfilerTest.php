@@ -4,7 +4,6 @@ namespace XhProf;
 
 class ProfilerTest extends \PHPUnit_Framework_TestCase
 {
-    private $storage;
     private $profiler;
 
     protected function setUp()
@@ -13,8 +12,7 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('The xhprof extension must be loaded first');
         }
 
-        $this->storage = $this->getMock('XhProf\\Storage\\StorageInterface');
-        $this->profiler = new Profiler($this->storage);
+        $this->profiler = new Profiler();
     }
 
     protected function tearDown()
@@ -71,8 +69,6 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
 
     public function testProfiler()
     {
-        $this->storage->expects($this->once())->method('store');
-
         $this->profiler->start();
 
         for ($i = 0; $i < 10; $i++) {
@@ -102,6 +98,7 @@ class ProfilerTest extends \PHPUnit_Framework_TestCase
         ;
 
         $this->profiler->setShutdownFunction(array($shutdownMock, 'getTimestamp'));
+        $this->profiler->start();
         $this->profiler->executeShutDown();
     }
 
