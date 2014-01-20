@@ -36,4 +36,9 @@ class MemoryStorage implements StorageInterface
 
         return $this->traces[$token];
     }
+
+    public function getTokens()
+    {
+        return array_keys($this->traces);
+    }
 }

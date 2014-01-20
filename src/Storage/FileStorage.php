@@ -46,6 +46,19 @@ class FileStorage implements StorageInterface
         return new Trace($token, unserialize($data));
     }
 
+    public function getTokens()
+    {
+        $files = new \GlobIterator($this->baseDir . '/*.trace');
+
+        $tokens = array();
+
+        foreach ($files as $file) {
+            $tokens[] = $file->getBasename('.trace');
+        }
+
+        return $tokens;
+    }
+
     private function getFilename($token)
     {
         return sprintf('%s/%s.trace', $this->baseDir, $token);

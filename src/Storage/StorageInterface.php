@@ -26,4 +26,9 @@ interface StorageInterface
      * @return Trace
      */
     public function fetch($token);
+
+    /**
+     * @return string[]
+     */
+    public function getTokens();
 } 

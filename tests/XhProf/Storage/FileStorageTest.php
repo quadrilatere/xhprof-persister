@@ -16,17 +16,19 @@ class FileStorageTest extends StorageTestCase
             ->will($this->returnValue($data))
         ;
 
-        $expectedFile = sprintf('%s/xhprof/%s.trace', sys_get_temp_dir(), $token);
+        $expectedFile = sprintf('%s/xhprof/tests/%s.trace', sys_get_temp_dir(), $token);
         $dir = dirname($expectedFile);
-        $directoryExists = file_exists($dir);
+        $this->assertFileNotExists($expectedFile);
 
-        $storage = new FileStorage();
+        $storage = new FileStorage($dir);
+
+        $this->assertEmpty($storage->getTokens());
         $this->assertNull($storage->store($trace));
+        $this->assertEquals(array($token), $storage->getTokens());
         $this->assertFileExists($expectedFile);
+
         unlink($expectedFile);
-        if (!$directoryExists) {
-            rmdir(dirname($expectedFile));
-        }
+        rmdir($dir);
     }
 
     public function testStorageCanFetchFile()
@@ -44,7 +46,7 @@ class FileStorageTest extends StorageTestCase
     public function testStorageThrowsExceptionOnLoadingNonexistentFile()
     {
         $token = '03a208c1140e2dd9ad953bfe5db9e7835e7a035a';
-        $storage = new FileStorage();
+        $storage = new FileStorage(sprintf('%s/xhprof/tests/', sys_get_temp_dir()));
 
         $storage->fetch($token);
     }
