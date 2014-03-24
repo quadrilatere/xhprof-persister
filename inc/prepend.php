@@ -24,3 +24,4 @@ $profiler->setShutdownFunction(function (Trace $trace) {
     $storage = new FileStorage();
     $storage->store($trace);
 });
+$profiler->start();
