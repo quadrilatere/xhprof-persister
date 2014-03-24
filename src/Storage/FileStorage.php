@@ -16,10 +16,14 @@ use XhProf\Trace;
 class FileStorage implements StorageInterface
 {
     private $baseDir;
+    private $extension;
+    private $fileMask;
 
-    public function __construct($baseDir = null)
+    public function __construct($baseDir = null, $extension = 'trace')
     {
         $this->baseDir = $baseDir ?: (sys_get_temp_dir() . '/xhprof');
+        $this->extension = $extension;
+        $this->fileMask = sprintf('%s/%%s.%s', $this->baseDir, $this->extension);
     }
 
     public function store(Trace $trace)
@@ -48,12 +52,12 @@ class FileStorage implements StorageInterface
 
     public function getTokens()
     {
-        $files = new \GlobIterator($this->baseDir . '/*.trace');
+        $files = new \GlobIterator($this->getFilename('*'));
 
         $tokens = array();
 
         foreach ($files as $file) {
-            $tokens[] = $file->getBasename('.trace');
+            $tokens[] = $file->getBasename(sprintf('.%s', $this->extension));
         }
 
         return $tokens;
@@ -61,6 +65,6 @@ class FileStorage implements StorageInterface
 
     private function getFilename($token)
     {
-        return sprintf('%s/%s.trace', $this->baseDir, $token);
+        return sprintf($this->fileMask, $token);
     }
 }
