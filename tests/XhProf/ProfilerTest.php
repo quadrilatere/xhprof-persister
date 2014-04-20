@@ -2,28 +2,29 @@
 
 namespace XhProf;
 
+/**
+ * @requires extension xhprof
+ */
 class ProfilerTest extends \PHPUnit_Framework_TestCase
 {
     private $profiler;
 
     protected function setUp()
     {
-        if (!extension_loaded('xhprof')) {
-            $this->markTestSkipped('The xhprof extension must be loaded first');
-        }
-
         $this->profiler = new Profiler();
     }
 
     protected function tearDown()
     {
-	    if (!extension_loaded('xhprof')) {
+        if (!extension_loaded('xhprof')) {
             return;
         }
 
         if ($this->profiler->isRunning()) {
             $this->profiler->stop();
         }
+
+        $this->profiler = null;
     }
 
     /**

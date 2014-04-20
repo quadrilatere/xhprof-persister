@@ -11,7 +11,9 @@
 
 namespace XhProf;
 
-class Profiler
+use XhProf\Context\ContextFactory;
+
+final class Profiler
 {
     private $flags;
     private $options;
@@ -83,7 +85,9 @@ class Profiler
 
         $token = sha1(uniqid().microtime());
 
-        return new Trace($token, $data);
+        $context = ContextFactory::create();
+
+        return new Trace($token, $data, $context);
     }
 
     public function executeShutdown()

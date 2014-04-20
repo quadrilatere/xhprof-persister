@@ -7,13 +7,14 @@ class FileStorageTest extends StorageTestCase
     public function testStorageCanWriteFile()
     {
         $data = unserialize(file_get_contents(__DIR__.'/../../fixtures/example.trace'));
+        $context = $this->getMock('XhProf\Context\Context');
         $token = '03a208c1140e2dd9ad953bfe5db9e7835e7a035a';
-        $trace = $this->getTraceMock($data, $token);
+        $trace = $this->getTraceMock($data, $context, $token);
 
         $trace
             ->expects($this->once())
-            ->method('getData')
-            ->will($this->returnValue($data))
+            ->method('serialize')
+            ->will($this->returnValue(serialize(array($token, $data))))
         ;
 
         $expectedFile = sprintf('%s/xhprof/tests/%s.trace', sys_get_temp_dir(), $token);
