@@ -34,7 +34,7 @@ class FileStorage implements StorageInterface
 
         $filename = $this->getFilename($trace->getToken());
 
-        if (!@file_put_contents($filename, serialize($trace->getData()))) {
+        if (!@file_put_contents($filename, serialize($trace))) {
             throw new \RuntimeException(sprintf('Could not write data in file %s', $filename));
         }
     }
@@ -47,7 +47,13 @@ class FileStorage implements StorageInterface
             throw new \RuntimeException(sprintf('Could not read data from file %s', $filename));
         }
 
-        return new Trace($token, unserialize($data));
+        $trace = unserialize($data);
+
+        if ($trace instanceof Trace) {
+            return $trace;
+        }
+
+        return new Trace($token, $trace);
     }
 
     public function getTokens()

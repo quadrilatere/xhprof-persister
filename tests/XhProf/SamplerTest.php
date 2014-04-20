@@ -2,6 +2,9 @@
 
 namespace XhProf;
 
+/**
+ * @requires extension xhprof
+ */
 class SamplerTest extends \PHPUnit_Framework_TestCase
 {
     protected $sampler;
