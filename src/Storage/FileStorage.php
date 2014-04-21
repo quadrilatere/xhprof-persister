@@ -21,7 +21,7 @@ class FileStorage implements StorageInterface
 
     public function __construct($baseDir = null, $extension = 'trace')
     {
-        $this->baseDir = $baseDir ?: (sys_get_temp_dir() . '/xhprof');
+        $this->baseDir = $baseDir ?: (rtrim(sys_get_temp_dir(), '/') . '/xhprof');
         $this->extension = $extension;
         $this->fileMask = sprintf('%s/%%s.%s', $this->baseDir, $this->extension);
     }
