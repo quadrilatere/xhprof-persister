@@ -11,11 +11,7 @@
 
 namespace XhProf;
 
-require_once __DIR__.'/../src/Profiler.php';
-require_once __DIR__.'/../src/Trace.php';
-require_once __DIR__.'/../src/Storage/FileStorage.php';
-require_once __DIR__.'/../src/Storage/StorageInterface.php';
-require_once __DIR__.'/../src/Storage/StorageException.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use XhProf\Storage\FileStorage;
 
