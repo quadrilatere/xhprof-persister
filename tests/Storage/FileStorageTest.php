@@ -6,7 +6,7 @@ class FileStorageTest extends StorageTestCase
 {
     public function testStorageCanWriteFile()
     {
-        $data = unserialize(file_get_contents(__DIR__.'/../../fixtures/example.trace'));
+        $data = unserialize(file_get_contents(__DIR__.'/../fixtures/example.trace'));
         $context = $this->getMock('XhProf\Context\Context');
         $token = '03a208c1140e2dd9ad953bfe5db9e7835e7a035a';
         $trace = $this->getTraceMock($data, $context, $token);
@@ -35,7 +35,7 @@ class FileStorageTest extends StorageTestCase
     public function testStorageCanFetchFile()
     {
         $token = 'example';
-        $baseDir = __DIR__.'/../../fixtures';
+        $baseDir = __DIR__.'/../fixtures';
 
         $storage = new FileStorage($baseDir);
         $this->assertInstanceOf('XhProf\Trace', $storage->fetch($token));

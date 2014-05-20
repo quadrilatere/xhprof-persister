@@ -1,0 +1,71 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "867160093733e8da15cb65739080b264",
+    "packages": [
+        {
+            "name": "csa/xhprof-common",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/csarrazi/xhprof-common.git",
+                "reference": "85f534504100956a8f8d903e0f5f02dc8c747e8f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/csarrazi/xhprof-common/zipball/85f534504100956a8f8d903e0f5f02dc8c747e8f",
+                "reference": "85f534504100956a8f8d903e0f5f02dc8c747e8f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "csa/xhprof-grapher": "Allows creating a callgraph from a trace",
+                "csa/xhprof-persister": "Allows the persistance of traces",
+                "csa/xhprof-profiler": "Allows profiling and sampling of a PHP application"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "XhProf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Charles Sarrazin",
+                    "email": "charles@sarraz.in"
+                }
+            ],
+            "description": "Common classes for the csa/xhprof-* libraries",
+            "time": "2014-05-20 22:57:22"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ],
+    "platform": {
+        "php": ">=5.3.3"
+    },
+    "platform-dev": [
+
+    ]
+}

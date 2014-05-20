@@ -29,4 +29,4 @@ class StorageTestCase extends \PHPUnit_Framework_TestCase
 
         return $trace;
     }
-} 
+}

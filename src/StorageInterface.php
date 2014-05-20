@@ -31,4 +31,4 @@ interface StorageInterface
      * @return string[]
      */
     public function getTokens();
-} 
+}

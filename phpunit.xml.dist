@@ -3,7 +3,7 @@
 <phpunit bootstrap="tests/bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="XhProf Test Suite">
-            <directory>tests/XhProf</directory>
+            <directory>tests/Storage</directory>
         </testsuite>
     </testsuites>
 

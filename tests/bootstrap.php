@@ -10,4 +10,4 @@
  */
 
 $loader = require_once __DIR__ . '/../vendor/autoload.php';
-$loader->add('XhProf\\', __DIR__);
+$loader->addPsr4('XhProf\\Storage\\', __DIR__.'/Storage');

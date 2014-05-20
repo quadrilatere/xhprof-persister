@@ -13,90 +13,16 @@ Installation
 
     composer require csa/xhprof-persister:dev-master
 
-Usage
------
+Notice
+------
 
-Create any type of PHP web or console application, then use the following in your code:
-
-```php
-<?php
-
-require_once __DIR__ . '/vendor/autoload.php';
-
-use XhProf\Profiler;
-
-$profiler = new Profiler();
-
-$profiler->start();
-
-// Your code
-
-// You may either use $profiler->stop() at the end of the code you wish to do something with the trace,
-// or let xhprof-persister manage it, as it registers a shutdown function automatically.
-$trace = $profiler->stop();
-```
-
-You can easily store a trace using any storage class implementing ```StorageInterface```:
-
-```php
-<?php
-
-require_once __DIR__ . '/vendor/autoload.php';
-
-use XhProf\Profiler;
-use XhProf\Storage\MemoryStorage;
-
-$profiler = new Profiler();
-$profiler->start();
-$trace = $profiler->stop();
-$storage = new MemoryStorage();
-$storage->store($trace);
-
-```
-
-You may also override the profiler's shutdown function:
-
-```php
-<?php
-
-require_once __DIR__ . '/vendor/autoload.php';
-
-use XhProf\Storage\FileStorage;
-use XhProf\Profiler;
-use XhProf\Trace;
-
-$profiler = new Profiler();
-
-$callback = function (Trace $trace) {
-    $storage = new FileStorage();
-    $storage->store($trace);
-
-    // Do whatever you want with the trace
-};
-
-$profiler->setShutdownFunction($callback);
-$profiler->start();
-```
-
-If you are using the file storage implementation, you may fetch a trace simply by using the fetch method. You may also
-fetch the list of available tokens:
-
-```php
-<?php
-
-require_once __DIR__ . '/vendor/autoload.php';
-
-use XhProf\Storage\FileStorage;
-
-$storage = new FileStorage();
-echo implode(PHP_EOL, $storage->getTokens());
-```
+Since ```v1.1.0```, ```csa/xhprof-persister``` is now a standalone library, decoupled from the ```csa/xhprof-profiler``` library. You may now use ```csa/xhprof-persister```
+to fetch traces, without having a dependency on the Xhprof php extension.
 
 Todo
 ----
 
-* Improve the prepend script.
-* Persist context (for both Cli or request contexts).
+* Add more storage backends.
 
 License
 -------
