@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/csarrazi/xhprof-common.git",
-                "reference": "de79680aa52e843a052ac49f17d8c4ffab3aceb6"
+                "reference": "4fd0791717ceb6581d9ea3e394194d7533757584"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/csarrazi/xhprof-common/zipball/de79680aa52e843a052ac49f17d8c4ffab3aceb6",
-                "reference": "de79680aa52e843a052ac49f17d8c4ffab3aceb6",
+                "url": "https://api.github.com/repos/csarrazi/xhprof-common/zipball/4fd0791717ceb6581d9ea3e394194d7533757584",
+                "reference": "4fd0791717ceb6581d9ea3e394194d7533757584",
                 "shasum": ""
             },
             "require": {
